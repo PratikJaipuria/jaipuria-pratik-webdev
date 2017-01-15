@@ -1,4 +1,4 @@
-# web-dev-template
+# jaipuria-pratik-webdev
 
 1. git clone https://github.com/PratikJaipuria/jaipuria-pratik-webdev.git
 1. cd jaipuria-pratik-webdev
