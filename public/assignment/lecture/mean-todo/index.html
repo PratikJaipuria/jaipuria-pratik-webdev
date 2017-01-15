@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TodoApp">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src = "app.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class = "container" ng-controller="BlogController">
+    <h1>Blog Post</h1>
+
+    <label>Title</label>
+    <input class = "form-control" />
+
+    <label>Description</label>
+    <textarea  class = "form-control"></textarea>
+
+    <button class = "btn btn-success btn-block">Post</button>
+    <div ng-repeat = "post in blogPosts">
+    <h2>{{post.title}} </h2>
+        <p>{{post.description}}</p>
+    </div>
+    <h2>My Second Post </h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+    <h2>My Third Post </h2>
+    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>From Page</th>
+            <th>Event</th>
+            <th>To Page</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2">Login Page</td>
+            <td>Register</td>
+            <td>Register Page</td>
+        </tr>
+        <tr>
+            <td>Login</td>
+            <td rowspan="2">Profile Page</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Register Page</td>
+            <td>Register</td>
+        </tr>
+        <tr>
+            <td>Cancel</td>
+            <td>Login Page</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
