@@ -5,3 +5,14 @@ input.form-control {
 body {
     padding-top: 36px;
 }
+
+.white-color {
+    color: white;
+    font-weight: bold;
+    text-decoration-color: white}
+
+#sitefooter ul {
+    padding: 0px;
+    list-style-type: none;
+}
+

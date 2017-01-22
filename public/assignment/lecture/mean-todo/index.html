@@ -12,51 +12,29 @@
     <h1>Blog Post</h1>
 
     <label>Title</label>
-    <input class = "form-control" />
+    <input ng-model="post.title" class = "form-control" />
 
     <label>Description</label>
-    <textarea  class = "form-control"></textarea>
+    <textarea  ng-model="post.description" class = "form-control"></textarea>
 
-    <button class = "btn btn-success btn-block">Post</button>
+    <button ng-click="createTodo(post)" class = "btn btn-primary btn-block">Create</button>
+    <button ng-click="updateTodo(post)" class = "btn btn-success btn-block">Update</button>
+
     <div ng-repeat = "post in blogPosts">
-    <h2>{{post.title}} </h2>
+        <a ng-click="deleteTodo(post)" class = "pull-right">
+            <span class="glyphicon glyphicon-remove"></span>
+        </a>
+        <a ng-click="selectTodo(post)" class = "pull-right">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+
+        <h2>{{post.title}} </h2>
         <p>{{post.description}}</p>
+
     </div>
-    <h2>My Second Post </h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-
-    <h2>My Third Post </h2>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
 
 
-    <table border="1">
-        <thead>
-        <tr>
-            <th>From Page</th>
-            <th>Event</th>
-            <th>To Page</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td rowspan="2">Login Page</td>
-            <td>Register</td>
-            <td>Register Page</td>
-        </tr>
-        <tr>
-            <td>Login</td>
-            <td rowspan="2">Profile Page</td>
-        </tr>
-        <tr>
-            <td rowspan="2">Register Page</td>
-            <td>Register</td>
-        </tr>
-        <tr>
-            <td>Cancel</td>
-            <td>Login Page</td>
-        </tr>
-        </tbody>
-    </table>
+
 </div>
 </body>
 </html>

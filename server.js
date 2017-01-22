@@ -10,6 +10,8 @@ app.use(express.static(__dirname + '/public'));
 
 require ("./test/app.js")(app);
 
+require("./mean-todo/app.js")(app);
+
 var port = process.env.PORT || 3000;
 
 app.listen(port);
