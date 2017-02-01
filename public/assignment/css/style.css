@@ -17,12 +17,12 @@ body {
 
     padding-top: 60px;
     padding-bottom: 60px;
-    overflow-x: hidden;
+    overflow: hidden;
 
 }
 
 .print-margin{
-    min-height: 2000px;
+    min-height: 800px;
     border-right:1px solid #ccc; }
 
 .white-color {
@@ -86,3 +86,5 @@ margin-right: 18px;}
 a.hover-decoration{
     text-decoration: none;
 }
+
+h1 { font-size: 5.9vw; }
