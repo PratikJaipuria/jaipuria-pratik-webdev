@@ -66,7 +66,7 @@ margin-right: 18px;}
 
 
 .navbar-default .navbar-brand {
-    color: black;
+    color: white;
 }
 
 .navbar-text {
@@ -87,7 +87,7 @@ a.hover-decoration{
     text-decoration: none;
 }
 
-h1 { font-size: 5.9vw; }
+/*h1 { font-size: 5.9vw; }*/
 
 .flowcontrol{
     margin-bottom: 30px;
