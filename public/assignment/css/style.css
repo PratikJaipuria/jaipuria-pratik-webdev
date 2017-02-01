@@ -17,7 +17,7 @@ body {
 
     padding-top: 60px;
     padding-bottom: 60px;
-    overflow: hidden;
+    overflow-x: hidden;
 
 }
 
@@ -88,3 +88,8 @@ a.hover-decoration{
 }
 
 h1 { font-size: 5.9vw; }
+
+.flowcontrol{
+    margin-bottom: 30px;
+    margin-right: 10px;
+}
