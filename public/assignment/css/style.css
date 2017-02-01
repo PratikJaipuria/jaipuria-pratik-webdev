@@ -17,6 +17,7 @@ body {
 
     padding-top: 60px;
     padding-bottom: 60px;
+    overflow-x: hidden;
 
 }
 
@@ -33,7 +34,7 @@ body {
 margin-right: 18px;}
 
 
-.jga-toolbar {
+.webdev-toolbar {
     position: absolute;
     right: 15px;
     background-color: white;
@@ -41,6 +42,10 @@ margin-right: 18px;}
     padding-bottom: 5px;
     border-bottom-left-radius: 5px;
     opacity: 0.7;
+}
+
+.bottom-user{
+    color :cornflowerblue;
 }
 
 /*.textarea {*/
@@ -78,3 +83,6 @@ margin-right: 18px;}
  */
 
 
+a.hover-decoration{
+    text-decoration: none;
+}
