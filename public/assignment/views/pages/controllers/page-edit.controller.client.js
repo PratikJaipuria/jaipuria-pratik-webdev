@@ -24,7 +24,15 @@
 
         function updatePage(page) {
 
-            PageService.updatePage(vm.pageId, page);
+            var updatePage = {
+                _id:vm.pageId,
+                websiteId :vm.websiteId,
+                name:vm.page.name,
+                description:vm.page.description
+
+            };
+
+            PageService.updatePage(vm.pageId, updatePage);
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
 
         }

@@ -21,7 +21,15 @@
         init();
 
         function updateWebsite(website) {
-            WebsiteService.updateWebsite(vm.websiteId,website);
+            var updateWeb = {
+                _id:vm.websiteId,
+                developerId :vm.userId,
+                name:vm.website.name,
+                description:vm.website.description
+
+            };
+
+            WebsiteService.updateWebsite(vm.websiteId,updateWeb);
             $location.url("/user/"+vm.userId+"/website");
         }
 
@@ -30,4 +38,4 @@
             $location.url("/user/"+vm.userId+"/website");
         }
     }
-})();
+    })();

@@ -54,7 +54,7 @@
 
         function createWidget(pageId,widget){
             widget.pageId = pageId;
-            widget._id = toString((new Date()).getTime());
+            widget._id = ((new Date()).getTime()).toString();
 
             if(widget.widgetType == "HEADER"){
 

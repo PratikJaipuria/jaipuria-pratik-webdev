@@ -27,7 +27,7 @@
         
         function updateWebsite(websiteId, website) {
             for(var w in websites) {
-                if(websites[w]._id === websiteId) {
+                if(websites[w]._id == websiteId) {
                         websites[w] = website;
                         // websites[w] = website.description;
                         return angular.copy(websites[w]);
