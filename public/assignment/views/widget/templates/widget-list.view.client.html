@@ -1,0 +1,75 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid bg-primary">
+
+        <div class="navbar-brand pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page">
+                <span class="glyphicon glyphicon-chevron-left white-color"></span>
+            </a>
+        </div>
+
+        <div class="navbar-brand pull-right">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <span class="glyphicon glyphicon-plus white-color"></span>
+            </a>
+        </div>
+
+        <div class="navbar-header">
+            <a class="navbar-brand white-color">Widgets</a>
+        </div>
+
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div ng-repeat="widget in model.widgets">
+        <div class="webdev-toolbar">
+        <div class="jga-toolbar">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon-align-justify"></span>
+        </div>
+        </div>
+
+
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER">
+                <ng-include src="'views/widget/templates/widget-HEADER.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <ng-include src="'views/widget/templates/widget-IMAGE.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="HTML">
+                <ng-include src="'views/widget/templates/widget-HTML.view.client.html'"></ng-include>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <ng-include src="'views/widget/templates/widget-YOUTUBE.view.client.html'"></ng-include>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid col-xs-12 bg-primary">
+
+            <div>
+                <a href="#/profile/{{model.userId}}" class="  navbar-link pull-right navbar-brand" >
+                    <span class="glyphicon glyphicon-user  white-color" ></span>
+                </a>
+            </div>
+
+            <div >
+                <a class="navbar-link pull-left navbar-brand" >
+                    <span class="glyphicon glyphicon-play white-color "></span>
+                </a>
+            </div>
+        <div class="  col-xs-2" >
+            <a class="  navbar-link pull-left navbar-brand" >
+                <span class="glyphicon glyphicon-eye-open white-color "></span>
+            </a>
+        </div>
+
+    </div>
+</nav>

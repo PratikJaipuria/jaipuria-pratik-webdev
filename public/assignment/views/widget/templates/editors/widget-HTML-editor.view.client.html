@@ -1,0 +1,25 @@
+<h3>HTML Editor</h3>
+
+<form>
+
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input ng-model="model.widget.name"
+               type="text" class="form-control"
+               id="name"
+               placeholder="Widget Name" >
+    </div>
+
+    <div class="form-group">
+        <label for="widgettext">Text</label>
+        <input ng-model="model.widget.text"
+               type="text" class="form-control"
+               id="widgettext"
+               placeholder="Page Title"
+               value="US senate reaches compromise on Emergency">
+    </div>
+
+
+</form>
+<a class="btn btn-danger btn-block"
+   ng-click="model.deleteWidget()">Delete</a>

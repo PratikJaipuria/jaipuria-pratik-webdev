@@ -1,0 +1,63 @@
+        <div class="container">
+        <h1>Register</h1>
+
+            <div class="alert alert-danger" ng-show="model.error">
+                    {{model.error}}
+            </div>
+
+
+            <div class="form-group">
+            <input ng-model="user1.username"
+                type="text"
+               class="form-control"
+               placeholder="username"/>
+            </div>
+
+            <div class="form-group">
+            <input ng-model="user1.password"
+                type="password"
+               class="form-control"
+               placeholder="password"/>
+            </div>
+
+            <div class="form-group">
+            <input ng-model="user1.password2"
+                type="password"
+               class="form-control"
+               placeholder="verify password"/>
+            </div>
+
+            <div class="form-group">
+
+
+            <input ng-model="user1.email"
+                   type="email"
+                   class="form-control"
+                   id="email"
+                   placeholder="abc@example.com">
+        </div>
+
+        <div class="form-group">
+
+            <input ng-model="user1.firstName"
+                   type="text"
+                   class="form-control"
+                   id="first-name"
+                   placeholder="First Name">
+        </div>
+
+        <div class="form-group">
+
+            <input ng-model="user1.lastName"
+                   type="text" class="form-control"
+                   id="last-name"
+                   placeholder="Last Name">
+        </div>
+
+
+        <a class="btn btn-primary btn-block"
+           ng-click="model.register(user1)">Register</a>
+
+        <a class="btn btn-danger  btn-block"
+           href="#/login">Cancel</a>
+    </div>

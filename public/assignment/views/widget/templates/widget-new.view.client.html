@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid bg-primary">
+        <div class="navbar-brand pull-left">
+            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new">
+                <span class="glyphicon glyphicon-chevron-left white-color"></span>
+            </a>
+        </div>
+        <div class="navbar-brand pull-right">
+            <a ng-click="model.createWidget(model.widget)">
+                <span class="glyphicon glyphicon-ok white-color"></span>
+            </a>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-brand white-color">Create Widgets</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid" >
+    <div ng-include="model.getCreatorTemplateUrl(model.widget.wg)">
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid col-xs-12 bg-primary">
+        <div>
+            <a href="#/profile/{{model.userId}}" class="  navbar-link pull-right navbar-brand" >
+                <span class="glyphicon glyphicon-user  white-color" ></span>
+            </a>
+        </div>
+    </div>
+</nav>
+

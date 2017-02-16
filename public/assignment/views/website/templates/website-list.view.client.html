@@ -1,0 +1,48 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid bg-primary">
+        <div class="col-sm-12 " >
+            <div class="navbar-brand pull-left">
+                <a href="#/profile/{{model.userId}}"
+                    class = "white-color">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-brand pull-right ">
+                <a href="#/user/{{model.userId}}/website/new">
+                    <span class="glyphicon glyphicon-plus white-color"></span>
+                </a>
+            </div>
+            <div class="navbar-header ">
+                <a class="navbar-brand" class = "white-color"><strong>Websites</strong></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid list-margin">
+    <div class="list-group">
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a class="hover-decoration" href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                    {{website.name}}
+                </a>
+
+                <a href="#/user/{{model.userId}}/website/{{website._id}}" class="icon pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </li>
+     </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid bg-primary ">
+        <div class="row">
+        <div class="  nvbar-header col-xs-12 " >
+            <a href="#/profile/{{model.userId}}" class="  navbar-link pull-right navbar-brand" >
+                <span class="glyphicon glyphicon-user white-color"></span>
+            </a>
+        </div>
+        </div>
+    </div>
+</nav>

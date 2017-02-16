@@ -12,6 +12,9 @@ input.form-control {
     margin-top:10px;
 }
 
+a{
+    cursor: pointer;
+}
 body {
     /*padding-top: 36px;*/
 

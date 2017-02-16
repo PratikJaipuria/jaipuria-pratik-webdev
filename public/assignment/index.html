@@ -1,25 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="WebAppMaker">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
-    <meta name="viewport" content="user-scalable=no width=device-width, initial-scale=1.0">
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../js/angular.js"></script>
+    <script src="../js/angular-route.js"></script>
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/website/controllers/website-list.controller.client.js"></script>
+    <script src="views/website/controllers/website-new.controller.client.js"></script>
+    <script src="views/website/controllers/website-edit.controller.client.js"></script>
+    <script src="views/pages/controllers/page-list.controller.client.js"></script>
+    <script src="views/pages/controllers/page-new.controller.client.js"></script>
+    <script src="views/pages/controllers/page-edit.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-list.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-edit.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-new.controller.client.js"></script>
+    <script src="views/widget/controllers/widget-create.controller.client.js"></script>
+
+    <script src="services/user.service.client.js"></script>
+    <script src="services/website.service.client.js"></script>
+    <script src="services/page.service.client.js"></script>
+    <script src="services/widget.service.client.js"></script>
+
+    <meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Web App</title>
+    <!--<base href="/assignment-wed">-->
 </head>
 <body>
-    <div class="container">
-        <h1>Login</h1>
-        <input type="text"
-               class="form-control"
-               placeholder="username"/>
-        <input type="password"
-               class="form-control"
-               placeholder="password"/>
-        <a class="btn btn-primary btn-block"
-           href="user/profile.html">Login</a>
-        <a class="btn btn-success btn-block"
-           href="user/register.html">Register</a>
-    </div>
+<div ng-view></div>
 </body>
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<title>Title</title>-->
+    <!--<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>-->
+    <!--<link href="css/style.css" rel="stylesheet"/>-->
+    <!--<meta name="viewport" content="user-scalable=no width=device-width, initial-scale=1.0">-->
+<!--</head>-->
+<!--<body>-->
+    <!--<div class="container">-->
+        <!--<h1>Login</h1>-->
+        <!--<input type="text"-->
+               <!--class="form-control"-->
+               <!--placeholder="username"/>-->
+        <!--<input type="password"-->
+               <!--class="form-control"-->
+               <!--placeholder="password"/>-->
+        <!--<a class="btn btn-primary btn-block"-->
+           <!--href="user/profile.view.client.html">Login</a>-->
+        <!--<a class="btn btn-success btn-block"-->
+           <!--href="user/register.view.client.html">Register</a>-->
+    <!--</div>-->
+<!--</body>-->
+<!--</html>-->
+

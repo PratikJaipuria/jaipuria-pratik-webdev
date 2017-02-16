@@ -1,0 +1,83 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid bg-primary">
+        <div class="col-sm-4 hidden-xs" >
+            <div class="navbar-brand pull-left">
+                <a href="#/user/{{model.userId}}/website"
+                   class = "white-color">
+                   <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+
+            <div class="navbar-brand pull-right ">
+                <a href="#/user/{{model.userId}}/website/new " class = "white-color">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+
+            <div class="navbar-header ">
+                <a class="navbar-brand white-color" ><strong>Websites</strong></a>
+            </div>
+        </div>
+
+
+        <div class="col-sm-8">
+            <div class="navbar-brand pull-left visible-xs">
+                <a href="#/user/{{model.userId}}/website" class = "white-color">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-brand pull-right">
+                <a ng-click="model.updateWebsite(website)" class = "white-color">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand"><strong>Edit Website</strong></a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="row container-fluid "  >
+    <div class="col-sm-4 hidden-xs  print-margin"    >
+        <li ng-repeat="website in model.websites" class="list-group-item">
+            <a class="hover-decoration" href="#/user/{{model.userId}}/website/{{website._id}}/page">
+                {{website.name}}
+            </a>
+            <a href="#/user/{{model.userId}}/website/{{website._id}}" class="icon pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+        </li>
+    </div>
+
+    <div class="col-sm-8">
+
+        <label for="name">Website Name</label>
+        <input  ng-model = "model.website.name"
+                class="form-control" id="name" placeholder="Website Name" value="Blogger">
+
+        <label for="description">Website Description</label>
+        <textarea ng-model="model.website.description"
+                  class="form-control"
+                  id="description"
+                  placeholder="Description">Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</textarea>
+
+        <a class="btn btn-danger  btn-block button-spacing"
+           ng-click="model.deleteWebsite()">Delete</a>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid bg-primary ">
+        <div class="row">
+            <div class="  nvbar-header col-xs-12 " >
+                <a href="#/profile/{{model.userId}}" class="  navbar-link pull-right navbar-brand" >
+                    <span class="glyphicon glyphicon-user white-color "></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</nav>

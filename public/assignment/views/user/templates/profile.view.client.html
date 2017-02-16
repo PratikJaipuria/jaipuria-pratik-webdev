@@ -1,0 +1,103 @@
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid bg-primary">
+        <div class="row">
+
+        <div class="navbar-header col-xs-12 ">
+
+            <a class="  navbar-brand pull-left white-color"  href="#"><font color="white"> Profile</font></a>
+            <a class="  navbar-brand pull-right  "  ng-click="model.update(model.user)" >
+            <span class="glyphicon glyphicon-ok white-color" >
+            </span></a>
+            <!--</p>-->
+            <!--</div>-->
+        </div>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="container">
+
+        <div class="alert alert-danger" ng-show="model.error">
+            {{model.error}}
+        </div>
+
+
+        <div class="alert alert-success" ng-show="model.message">
+            {{model.message}}
+        </div>
+
+        <div class ="col-xs-12">
+
+        <form>
+            <div class="form-group">
+                <label for="username">Username</label>
+
+                <input ng-model="model.user.username"
+                       type="text"
+                       class="form-control"
+                       id="username"
+                       placeholder="Jaipuria.p">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+
+                <input ng-model="model.user.email"
+                       type="email"
+                       class="form-control"
+                       id="email"
+                       placeholder="jaipuria.p@husky.neu.edu">
+            </div>
+
+            <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input ng-model="model.user.firstName"
+                       type="text"
+                       class="form-control"
+                       id="first-name"
+                       placeholder="Pratik">
+            </div>
+
+            <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input ng-model="model.user.lastName"
+                       type="text" class="form-control"
+                       id="last-name"
+                       placeholder="Jaipuria">
+            </div>
+        </form>
+
+
+        <a class="btn btn-primary btn-block"
+           href="#/user/{{model.user._id}}/website">Websites</a>
+
+        <a ng-click="model.update(model.user)"
+               class="btn btn-primary btn-block">
+                Update
+        </a>
+        <a class="btn btn-danger  btn-block"
+           href="#/login">Logout</a>
+
+
+        </div>
+    </div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid bg-primary ">
+        <div class="row">
+            <div class="  nvbar-header col-xs-12 " >
+                <a ng-click="model.delete(model.user._id)"
+                   class="  navbar-link pull-left navbar-brand" >
+                    <span class="glyphicon glyphicon-remove white-color"></span>
+                </a>
+                <a href="#/profile/{{model.user._id}}"
+                   class="navbar-link pull-right navbar-brand" >
+                    <span class="glyphicon glyphicon-user white-color"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</nav>
