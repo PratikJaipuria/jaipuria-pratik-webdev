@@ -11,12 +11,23 @@
         vm.login = login;
 
         function login(user) {
-            var loginUser = UserService.findUserByCredentials(user.username, user.password);
-            if(loginUser != null) {
-                $location.url('/profile/' + loginUser._id);
-            } else {
-                vm.error = 'user not found';
-            }
+            // showSpinningHourGlass();
+            var promise = UserService.findUserByCredentials(user.username, user.password);
+
+            promise
+                .success(function (loginUser) {
+                // hideSpinningWa
+                    if(loginUser != 222) {
+                        $location.url('/profile/' + loginUser._id);
+                    } else {
+                        vm.error = 'user not found';
+                    }
+                    });
+                // .error(function () {
+                //      vm.error = 'user not found';
+                //      // return true;
+                // })
+
         }
     }
 })();

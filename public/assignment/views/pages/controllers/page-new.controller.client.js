@@ -14,14 +14,23 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            // vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (webpages) {
+                    vm.pages = webpages;
+                })
         }
         init();
 
         function createPage (page) {
-            PageService.createPage(vm.websiteId, page);
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
-            console.log(vm.pages);
+            PageService
+                .createPage(vm.websiteId, page)
+                .success(function (page) {
+                    vm.page = page;
+                });
+            // vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            // console.log(vm.pages);
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page");
         };
     }

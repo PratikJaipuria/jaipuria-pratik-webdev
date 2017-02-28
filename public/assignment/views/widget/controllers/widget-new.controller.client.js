@@ -16,7 +16,13 @@
          vm.getWidgetUrl = getWidgetUrl;
          vm.getCreatorTemplateUrl = getCreatorTemplateUrl;
          function init() {
-             vm.widget = WidgetService.findWidgetById(vm.widgetId);
+             // vm.widget = WidgetService.findWidgetById(vm.widgetId);
+             WidgetService
+                 .findWidgetById(vm.widgetId)
+                 .success(function (widget) {
+                     vm.widget = widget;
+
+                 })
          }
 
          init();

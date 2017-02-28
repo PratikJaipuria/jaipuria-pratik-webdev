@@ -18,21 +18,38 @@
 
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            // vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    vm.widget = widget;
+
+                })
+
         }
         init();
 
         function deleteWidget() {
-            WidgetService.deleteWidget(vm.widgetId);
+            WidgetService
+                .deleteWidget(vm.widgetId)
+                .success(function () {
+
+                });
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
         }
 
         function getEditorTemplateUrl(type) {
-            return 'views/widget/templates/editors/widget-'+type+'-editor.view.client.html';
+            if(type){
+                return 'views/widget/templates/editors/widget-'+type+'-editor.view.client.html';
+            }
         }
 
         function updateWidget(widget){
-            WidgetService.updateWidget(vm.widgetId, widget);
+            WidgetService
+                .updateWidget(vm.widgetId, widget)
+                .success(function (widgets) {
+
+                });
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
         }
 

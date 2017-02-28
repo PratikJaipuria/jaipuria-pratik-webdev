@@ -14,12 +14,14 @@
 
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.websiteId);
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (webpages) {
+                    vm.pages = webpages;
+                })
         }
 
         init();
-
-
 
     }
 })();

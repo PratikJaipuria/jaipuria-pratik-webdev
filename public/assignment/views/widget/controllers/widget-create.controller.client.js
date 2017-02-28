@@ -16,7 +16,13 @@
         vm.createWidget = createWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            // vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    vm.widget = widget;
+
+                })
         }
         init();
 
@@ -39,25 +45,41 @@
 
             if(vm.wg==1){
             widget.widgetType="HEADER";
-            WidgetService.createWidget(vm.pageId,widget);
+            WidgetService
+                .createWidget(vm.pageId,widget)
+                .success(function (widget) {
+
+                });
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
             if(vm.wg==2){
                 widget.widgetType="IMAGE";
-                WidgetService.createWidget(vm.pageId,widget);
+                WidgetService
+                    .createWidget(vm.pageId,widget)
+                    .success(function (widget) {
+
+                    });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
             if(vm.wg==3){
                 widget.widgetType="YOUTUBE";
-                WidgetService.createWidget(vm.pageId,widget);
+                WidgetService
+                    .createWidget(vm.pageId,widget)
+                    .success(function (widget) {
+
+                    });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
             if(vm.wg==4){
                 widget.widgetType="HTML";
-                WidgetService.createWidget(vm.pageId,widget);
+                WidgetService
+                    .createWidget(vm.pageId,widget)
+                    .success(function (widget) {
+
+                    });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 

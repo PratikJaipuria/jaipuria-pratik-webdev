@@ -9,23 +9,66 @@
     function registerController(UserService, $location) {
         var vm = this;
         vm.register = register;
+        // console.log(vm.user1);
 
         function register(user1) {
+                UserService
+                    .findUserByUsername(user1.username)
+                    // console.log(user1.username)
+                    .success(function (user) {
+                        vm.error = "sorry "+ user.username + " exist"
 
-                var newUser = {
-                    _id: ((new Date()).getTime()).toString(),
-                    username: user1.username,
-                    password: user1.password,
-                    email:user1.email,
-                    firstName: user1.firstName,
-                    lastName:user1.lastName
+                    })
+                    .error(function () {
+                        var newUser = {
+                            _id: ((new Date()).getTime()).toString(),
+                            username: user1.username,
+                            password: user1.password,
+                            email:user1.email,
+                            firstName: user1.firstName,
+                            lastName:user1.lastName
 
-                };
-                registerUser = UserService.createUser(newUser);
-                var user = UserService.findUserByUsername(user1.username);
-                vm.user = user;
-                $location.url('/profile/' + user._id);
+                        };
 
+                        UserService
+                            .createUser(newUser)
+                            .success(function (user){
+
+                                // var user = UserService.findUserByUsername(user1.username);
+                                vm.user = user;
+                                $location.url('/profile/' + user._id);
+
+
+                            });
+
+
+                    });
+
+                // var newUser = {
+                //     _id: ((new Date()).getTime()).toString(),
+                //     username: user1.username,
+                //     password: user1.password,
+                //     email:user1.email,
+                //     firstName: user1.firstName,
+                //     lastName:user1.lastName
+                //
+                // };
+                // // registerUser = UserService.createUser(newUser);
+                // var user = UserService.findUserByUsername(user1.username);
+                // vm.user = user;
+                // $location.url('/profile/' + user._id);
+
+
+            // UserService
+            //     .createUser(newUser)
+            //     .success(function (user){
+            //
+            //         // var user = UserService.findUserByUsername(user1.username);
+            //         vm.user = user;
+            //         $location.url('/profile/' + user._id);
+            //
+            //
+            //     });
 
 
 

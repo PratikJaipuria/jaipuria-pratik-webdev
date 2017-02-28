@@ -19,8 +19,17 @@
 
 
         function init() {
-            vm.widgets = WidgetService.findAllWidgets(vm.pageId);
-            vm.widget = WidgetService.findWidgetsByPageId(vm.widgetId);
+            WidgetService
+                .findAllWidgets(vm.pageId)
+                .success(function (widgets) {
+                    vm.widgets = widgets;
+                });
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    vm.widget = widget;
+
+                })
         }
         init();
 
