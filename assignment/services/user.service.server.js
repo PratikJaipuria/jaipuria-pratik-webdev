@@ -17,16 +17,12 @@ module.exports = function (app) {
     ];
 
 
-
     function deleteUser(req,res){
         var userId = req.params.userId;
         for(var u in users) {
             var user = users[u];
             if( user._id == userId ) {
                 users.splice(u, 1);
-                // console.log("successfully deleted");
-                // res.json(users[u]);
-                // return;
             }
         }
 
@@ -45,26 +41,20 @@ module.exports = function (app) {
         };
 
         users.push(newUser);
-        // users.put(newUser);
-        // return angular.copy(newUser);
         res.json(newUser);
-        // return;
+
 
     }
 
     function updateUser(req,res) {
         var userId = req.params.userId;
         var newUser = req.body;
-        // console.log(newUser.firstName);
-        // console.log(userId);
         for(var u in users) {
-            // var user = users[u];
             if( users[u]._id === userId ) {
                 users[u].firstName = newUser.firstName;
                 users[u].lastName = newUser.lastName;
                 users[u].username = newUser.username;
                 users[u].email = newUser.email;
-                // console.log(users[u]);
                 res.json(users[u]);
                 return;
             }
@@ -80,21 +70,6 @@ module.exports = function (app) {
         res.json(user);
     }
 
-
-    // function findUserByUsername(req,res) {
-    //     var username = req.query.username;
-    //     console(username);
-    //     var user = users.find(function (username) {
-    //         return user.username==username
-    //
-    //     });
-    //     // res.send(user);
-    //     if (user) {
-    //         res.send(user);
-    //     } else{
-    //         res.sendStatus(404);//.send('User not found for username'+ username);
-    //     }
-    // }
 
     function findUser(req, res) {
         var username = req.query.username;

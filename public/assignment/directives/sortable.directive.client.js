@@ -9,9 +9,8 @@
     function sortableDir() {
         function linkFunc(scope, element, attributes) {
             element.sortable({
-                axis: 'y'
-
-                // handle: ".handle"
+                axis: 'y',
+                handle: "span.align"
             });
         }
         return {

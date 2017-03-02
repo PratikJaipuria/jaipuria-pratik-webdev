@@ -22,11 +22,11 @@
                     } else {
                         vm.error = 'user not found';
                     }
-                    });
-                // .error(function () {
-                //      vm.error = 'user not found';
-                //      // return true;
-                // })
+                    })
+                .error(function () {
+                     vm.error = 'user not found';
+                     // return true;
+                })
 
         }
     }

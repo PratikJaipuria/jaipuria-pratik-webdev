@@ -40,38 +40,7 @@
 
 
                             });
-
-
                     });
-
-                // var newUser = {
-                //     _id: ((new Date()).getTime()).toString(),
-                //     username: user1.username,
-                //     password: user1.password,
-                //     email:user1.email,
-                //     firstName: user1.firstName,
-                //     lastName:user1.lastName
-                //
-                // };
-                // // registerUser = UserService.createUser(newUser);
-                // var user = UserService.findUserByUsername(user1.username);
-                // vm.user = user;
-                // $location.url('/profile/' + user._id);
-
-
-            // UserService
-            //     .createUser(newUser)
-            //     .success(function (user){
-            //
-            //         // var user = UserService.findUserByUsername(user1.username);
-            //         vm.user = user;
-            //         $location.url('/profile/' + user._id);
-            //
-            //
-            //     });
-
-
-
         }
     }
 })();

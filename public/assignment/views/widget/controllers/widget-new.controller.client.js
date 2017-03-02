@@ -11,7 +11,10 @@
          var vm = this;
          vm.userId = $routeParams.uid;
          vm.websiteId = $routeParams.wid;
-         vm.pageId = $routeParams.pid;
+         vm.pageId = $routeParams.pid
+         // vm.widgetId = $routeParams.wgid;
+         // console.log(widgetId);
+
          vm.wg = $routeParams.wg;
          vm.getWidgetUrl = getWidgetUrl;
          vm.getCreatorTemplateUrl = getCreatorTemplateUrl;
@@ -20,14 +23,15 @@
              WidgetService
                  .findWidgetById(vm.widgetId)
                  .success(function (widget) {
-                     vm.widget = widget;
+                      vm.widget = widget;
+                     // vm.widgetId = widget._id;
 
                  })
          }
 
          init();
 
-         function getWidgetUrl(widgetType) {
+             function getWidgetUrl(widgetType) {
              var url = 'views/widget/templates/widget-new.view.client.html';
              return url;
          }

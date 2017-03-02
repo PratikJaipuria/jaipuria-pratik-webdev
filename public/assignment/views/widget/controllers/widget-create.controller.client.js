@@ -11,18 +11,20 @@
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
+        // vm.widgetId = $routeParams.wgid;
         vm.wg = $routeParams.wg;
         vm.getCreatorTemplateUrl = getCreatorTemplateUrl;
         vm.createWidget = createWidget;
 
         function init() {
             // vm.widget = WidgetService.findWidgetById(vm.widgetId);
-            WidgetService
-                .findWidgetById(vm.widgetId)
-                .success(function (widget) {
-                    vm.widget = widget;
-
-                })
+            // WidgetService
+            //     .findWidgetById(vm.widgetId)
+            //     .success(function (widget) {
+            //         vm.widget = widget;
+            //         vm.widgetId = widget._id;
+            //
+            //     })
         }
         init();
 
@@ -48,7 +50,7 @@
             WidgetService
                 .createWidget(vm.pageId,widget)
                 .success(function (widget) {
-
+                    vm.widgetId = widget._id;
                 });
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
@@ -58,7 +60,7 @@
                 WidgetService
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
-
+                        vm.widgetId = widget._id;
                     });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
@@ -68,7 +70,7 @@
                 WidgetService
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
-
+                        vm.widgetId = widget._id;
                     });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
@@ -78,7 +80,7 @@
                 WidgetService
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
-
+                            vm.widgetId = widget._id;
                     });
                 $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
