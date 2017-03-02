@@ -33,7 +33,7 @@
         }
         init();
 
-        function getWidgetTemplateUrl(widgetType) {
+        function getWidgetTemplateUrl() {
             var url = 'views/widget/templates/widget-edit.view.client.html';
 
             return url;

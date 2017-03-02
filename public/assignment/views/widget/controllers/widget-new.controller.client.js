@@ -31,7 +31,7 @@
 
          init();
 
-             function getWidgetUrl(widgetType) {
+             function getWidgetUrl() {
              var url = 'views/widget/templates/widget-new.view.client.html';
              return url;
          }

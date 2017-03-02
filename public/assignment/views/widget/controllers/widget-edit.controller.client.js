@@ -15,6 +15,8 @@
         vm.getEditorTemplateUrl = getEditorTemplateUrl;
         vm.updateWidget = updateWidget;
         vm.deleteWidget = deleteWidget;
+        // vm.ValidityState = ValidityState;
+        // vm.ValidityState = validate;
 
 
         function init() {
@@ -28,6 +30,18 @@
 
         }
         init();
+
+
+            // function ValidityState()
+            // {  var inpObj = document.getElementById("uploadfile");
+            //     console.log(inpObj);
+            //     if(name== null )
+            //     {
+            //         alert("Upload an image");
+            //         return false;
+            //     }
+            //     return true;
+            // }
 
         function deleteWidget() {
             WidgetService
@@ -52,6 +66,8 @@
                 });
             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
         }
+
+
 
     }
 })();

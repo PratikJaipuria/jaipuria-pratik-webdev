@@ -17,14 +17,14 @@
         vm.createWidget = createWidget;
 
         function init() {
-            // vm.widget = WidgetService.findWidgetById(vm.widgetId);
-            // WidgetService
-            //     .findWidgetById(vm.widgetId)
-            //     .success(function (widget) {
-            //         vm.widget = widget;
-            //         vm.widgetId = widget._id;
-            //
-            //     })
+            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            WidgetService
+                .findWidgetById(vm.widgetId)
+                .success(function (widget) {
+                    vm.widget = widget;
+                    vm.widgetId = widget._id;
+
+                })
         }
         init();
 
@@ -51,8 +51,9 @@
                 .createWidget(vm.pageId,widget)
                 .success(function (widget) {
                     vm.widgetId = widget._id;
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                 });
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+
             }
 
             if(vm.wg==2){
@@ -61,8 +62,9 @@
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
                         vm.widgetId = widget._id;
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                     });
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                // $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
             if(vm.wg==3){
@@ -71,8 +73,9 @@
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
                         vm.widgetId = widget._id;
+                        $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                     });
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                // $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
             if(vm.wg==4){
@@ -81,8 +84,9 @@
                     .createWidget(vm.pageId,widget)
                     .success(function (widget) {
                             vm.widgetId = widget._id;
+                            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                     });
-                $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+                // $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
         }
