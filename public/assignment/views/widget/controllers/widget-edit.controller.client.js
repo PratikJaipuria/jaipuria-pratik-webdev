@@ -8,6 +8,7 @@
 
     function WidgetEditController($location,$routeParams, WidgetService) {
         var vm = this;
+
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
@@ -17,7 +18,7 @@
         vm.deleteWidget = deleteWidget;
         // vm.ValidityState = ValidityState;
         // vm.ValidityState = validate;
-
+        // console.log(x);
 
         function init() {
             // vm.widget = WidgetService.findWidgetById(vm.widgetId);
@@ -47,9 +48,9 @@
             WidgetService
                 .deleteWidget(vm.widgetId)
                 .success(function () {
-
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                 });
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+
         }
 
         function getEditorTemplateUrl(type) {
@@ -62,12 +63,9 @@
             WidgetService
                 .updateWidget(vm.widgetId, widget)
                 .success(function (widgets) {
-
+                    $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
                 });
-            $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
+
         }
-
-
-
     }
 })();
