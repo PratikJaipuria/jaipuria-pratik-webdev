@@ -1,0 +1,21 @@
+/*#container*/
+/*{*/
+    /*max-width:1000px;*/
+    /*max-height:1000px;*/
+    /*!*border:1px solid #000;*!*/
+
+/*}*/
+[data-slides] {
+    background-image: url(../sample.jpg); /* Default image. */
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: cover;
+    transition: background-image 1s linear;
+}
+
+/* Use additional CSS to control the `height` of `[data-slides]`, like so: */
+
+.test { height: 220px; }
+@media all and (min-width: 48em) {
+    .test { height: 320px; }
+}

@@ -14,7 +14,7 @@
                 var promise = UserService.findUserById(userId);
                 promise.success(function (user) {
                     vm.user = user;
-
+                    // console.log("Profile Controller:"+user);
                 });
             }
 

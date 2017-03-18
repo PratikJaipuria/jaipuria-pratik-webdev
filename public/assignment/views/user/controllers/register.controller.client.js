@@ -14,28 +14,31 @@
         function register(user1) {
                 UserService
                     .findUserByUsername(user1.username)
-                    // console.log(user1.username)
+                     //console.log(user1.username)
                     .success(function (user) {
                         vm.error = "sorry "+ user.username + " exist"
-
+                        console.log(user1.username)
                     })
                     .error(function () {
                         var newUser = {
-                            _id: ((new Date()).getTime()).toString(),
+                            // _id: ((new Date()).getTime()).toString(),
                             username: user1.username,
                             password: user1.password,
-                            email:user1.email,
                             firstName: user1.firstName,
-                            lastName:user1.lastName
-
+                            lastName:user1.lastName,
+                            email:user1.email,
+                            phone:user1.phone,
+                            // websites:[String],
+                            datecreated:""
                         };
 
                         UserService
                             .createUser(newUser)
                             .success(function (user){
-
-                                // var user = UserService.findUserByUsername(user1.username);
+                                // console.log("abcd");
+                                // var user = UserService.findUserByUsername(user.username);
                                 vm.user = user;
+                                // console.log("User ID",user.firstName);
                                 $location.url('/profile/' + user._id);
 
 

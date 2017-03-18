@@ -17,9 +17,10 @@
             promise
                 .success(function (loginUser) {
                 // hideSpinningWa
-                    if(loginUser != 222) {
+                    if(loginUser != '0') {
                         $location.url('/profile/' + loginUser._id);
                     } else {
+
                         vm.error = 'user not found';
                     }
                     })

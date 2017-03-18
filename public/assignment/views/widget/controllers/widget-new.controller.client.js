@@ -11,7 +11,7 @@
          var vm = this;
          vm.userId = $routeParams.uid;
          vm.websiteId = $routeParams.wid;
-         vm.pageId = $routeParams.pid
+         vm.pageId = $routeParams.pid;
          // vm.widgetId = $routeParams.wgid;
          // console.log(widgetId);
 
@@ -19,14 +19,26 @@
          vm.getWidgetUrl = getWidgetUrl;
          vm.getCreatorTemplateUrl = getCreatorTemplateUrl;
          function init() {
-             // vm.widget = WidgetService.findWidgetById(vm.widgetId);
-             WidgetService
-                 .findWidgetById(vm.widgetId)
-                 .success(function (widget) {
-                      vm.widget = widget;
-                     // vm.widgetId = widget._id;
 
-                 })
+             WidgetService
+                 .findAllWidgets(vm.pageId)
+
+                 .success(function (widgets) {
+                     vm.widgets = widgets;
+                     // console.log(widgets);
+                 });
+             // vm.widget = WidgetService.findWidgetById(vm.widgetId);
+             // WidgetService
+             //     .findWidgetById(vm.widgetId)
+             //     .success(function (widget) {
+             //          vm.widget = widget;
+             //         // vm.widgetId = widget._id;
+             //
+             //     })
+             //     .error(function () {
+             //         vm.error = 'widget not found';
+             //         // return true;
+             //     })
          }
 
          init();

@@ -1,12 +1,15 @@
 /**
  * Created by Pratik on 2/22/2017.
  */
-module.exports = function (app) {
+module.exports = function (app,model) {
     app.get("/api/website/:websiteId/page",findAllPagesForWebsite);
     app.get("/api/page/:pageId",findPageById);
     app.post("/api/website/:websiteId/page",createPage);
     app.put("/api/page/:pageId",updatePage);
     app.delete("/api/page/:pageId",deletePage);
+
+    var pageModel = model.pageModel;
+    var websiteModel = model.websiteModel;
 
     var pages = [
         {_id: "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
@@ -17,61 +20,85 @@ module.exports = function (app) {
 
     function deletePage(req,res) {
         var pageId = req.params.pageId;
-
-        for(var p in pages){
-            if(pages[p]._id == pageId ){
-                pages.splice(p,1);
-            }
-        }
+        pageModel
+            .findPageById(pageId)
+            .then(function (page) {
+                websiteModel
+                    .deletePageId(page._website,page._id)
+                    .then(function (pageid) {
+                        pageModel
+                            .deletePage(pageid)
+                            .then(function () {
+                                // res.sendStatus(200);
+                            })
+                    })
+            });
     }
 
     function updatePage(req,res) {
         var pageId = req.params.pageId;
         var page = req.body;
 
-        for(var p in pages){
-            if(pages[p]._id == pageId){
-                pages[p] = page;
-                res.json(pages[p]);
-                return;
-                // return angular.copy(pages[p]);
-            }
-        }
+        pageModel
+            .updatePage(pageId,page)
+            .then(function (page) {
+                res.json(page)
+            },function (error) {
+                res.sendStatus(500).send(error);
+
+            });
     }
 
     function createPage(req,res) {
         var websiteId = req.params.websiteId;
         var page = req.body;
-        page.websiteId = websiteId;
-        page._id = ((new Date()).getTime()).toString();
-        pages.push(page);
-        res.json(page);
+        pageModel
+            .createPage(websiteId,page)
+            .then(function (page) {
+                //res.json(page);
+                websiteModel
+                    .addPageId(websiteId,page._id)
+                    .then(function (page) {
+                        res.json(page);
+                    }), function () {
+                    res.sendStatus(404);
+                }
+                },
+                function (error) {
+                    res.sendStatus(500).send(error);
+                    // console.log("error",error);
+                }
+            );
     }
+
 
     function findPageById(req,res) {
         var pageId = req.params.pageId;
-        for(var p in pages){
-            if(pages[p]._id == pageId){
-                // return angular.copy(pages[p]);
-                res.json(pages[p]);
-            }
-        }
+
+        pageModel
+            .findPageById(pageId)
+            .then(function(page){
+                res.json(page)
+            },function (error) {
+                res.sendStatus(500).send(error);
+
+        });
     }
 
 
     function findAllPagesForWebsite(req,res) {
         var websiteId = req.params.websiteId;
 
-        var webpages = [];
-        for(var p in pages){
-            if(pages[p].websiteId == websiteId){
-                //return angular.copy(pages[p]);
-                webpages.push(pages[p]);
-            }
-        }
-        // return webpages;
-        res.json(webpages);
+        pageModel
+            .findAllPagesForWebsite(websiteId)
+            .then(function (webpages) {
+                // console.log(webpages);
+                res.json(webpages);
+            },function (error) {
+                res.sendStatus(500).send(error);
+            });
+
     }
 
 
-}
+};

@@ -15,23 +15,35 @@
         vm.userId = $routeParams.uid;
         vm.websiteId = $routeParams.wid;
         vm.pageId = $routeParams.pid;
-
+        vm.rearrangeList = rearrangeList;
 
 
         function init() {
             WidgetService
                 .findAllWidgets(vm.pageId)
+
                 .success(function (widgets) {
                     vm.widgets = widgets;
+                    // console.log(widgets);
                 });
-            WidgetService
-                .findWidgetById(vm.widgetId)
-                .success(function (widget) {
-                    vm.widget = widget;
-
-                })
+            // WidgetService
+            //     .findWidgetById(vm.widgetId)
+            //     .success(function (widget) {
+            //         vm.widget = widget;
+            //
+            //     })
         }
         init();
+
+        function rearrangeList(updatedIndex){
+            console.log(updatedIndex);
+            var promise=WidgetService.rearrangeList(vm.pageId, updatedIndex);
+            promise.error(function (){
+
+                    vm.error="Unable to update WidgetList";
+                }
+            );
+        }
 
         function getWidgetTemplateUrl() {
             var url = 'views/widget/templates/widget-edit.view.client.html';

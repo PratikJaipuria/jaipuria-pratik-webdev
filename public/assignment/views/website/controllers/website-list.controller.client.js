@@ -16,7 +16,7 @@
                 .findAllWebsitesByUser(vm.userId)
                 .success(function (websites) {
                     vm.websites = websites;
-                
+
             })
         }
         init();

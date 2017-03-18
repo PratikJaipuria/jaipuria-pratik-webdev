@@ -17,14 +17,25 @@
         vm.createWidget = createWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            // vm.widget = WidgetService.findWidgetById(vm.widgetId);
+            // WidgetService
+            //     .findWidgetById(vm.widgetId)
+            //     .success(function (widget) {
+            //         vm.widget = widget;
+            //         vm.widgetId = widget._id;
+            //
+            //     })
+            //     .error(function () {
+            //         vm.error = 'widget not found';
+            //         // return true;
+            //     })
             WidgetService
-                .findWidgetById(vm.widgetId)
-                .success(function (widget) {
-                    vm.widget = widget;
-                    vm.widgetId = widget._id;
+                .findAllWidgets(vm.pageId)
 
-                })
+                .success(function (widgets) {
+                    vm.widgets = widgets;
+                    console.log(widgets);
+                });
         }
         init();
 
