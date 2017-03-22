@@ -52,6 +52,9 @@
             if(vm.wg==4) {
                 return 'views/widget/templates/create/widget-HTML-create.view.client.html';
             }
+            if(vm.wg==5) {
+                return 'views/widget/templates/create/widget-TEXT-create.view.client.html';
+            }
         }
 
         function createWidget(widget){
@@ -89,16 +92,26 @@
                 // $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
-            if(vm.wg==4){
-                widget.widgetType="HTML";
+            if(vm.wg==4) {
+                widget.widgetType = "HTML";
                 WidgetService
-                    .createWidget(vm.pageId,widget)
+                    .createWidget(vm.pageId, widget)
                     .success(function (widget) {
+                        vm.widgetId = widget._id;
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    });
+
+            }
+                if(vm.wg==5){
+                    widget.widgetType="TEXT";
+                    WidgetService
+                        .createWidget(vm.pageId,widget)
+                        .success(function (widget) {
                             vm.widgetId = widget._id;
                             $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
-                    });
+                        });}
                 // $location.url("/user/"+vm.userId+"/website/"+vm.websiteId+"/page/"+vm.pageId+"/widget");
             }
 
-        }
+
     }})();

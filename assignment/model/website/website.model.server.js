@@ -22,18 +22,38 @@ module.exports = function() {
     return api;
 
     function deletePageId(websiteId,pageId) {
+        // console.log(websiteId);
         var deferred = q.defer();
+    //     websiteModel
+    //         .update({_id: websiteId},{
+    //             $pull: {pages:pageId }
+    //         },function (err) {
+    //             if (err){
+    //                 deferred.abort(err);
+    //             }else{
+    //                 deferred.resolve(pageId);
+    //             }
+    //         });
+    //
+    //     return deferred.promise;
+    // }
+
         websiteModel
-            .update({_id: websiteId},{
-                $pull: {pages:pageId }
-            },function (err) {
-                if (err){
+            .findOne({_id: websiteId}, function (err, website) {
+                if(err) {
                     deferred.abort(err);
-                }else{
-                    deferred.resolve(pageId);
+                } else {
+                    websiteModel
+                        .update({_id: website._id}, {$pull : {pages: pageId}},
+                            function (err, website) {
+                                if(err) {
+                                    deferred.abort(err);
+                                } else {
+                                    deferred.resolve(website);
+                                }
+                            });
                 }
             });
-
         return deferred.promise;
     }
 
@@ -64,7 +84,7 @@ module.exports = function() {
             if (err){
                 deferred.abort(err);
             }else{
-                deferred.resolve();
+                deferred.resolve(websiteId);
             }
         });
 

@@ -34,7 +34,7 @@
 
 
         function createUser(user) {
-
+            console.log("Client",user);
             return $http.post("/api/user/", user);
 
         }

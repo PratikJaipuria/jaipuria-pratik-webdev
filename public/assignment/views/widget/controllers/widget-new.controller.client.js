@@ -61,6 +61,9 @@
              if(vm.wg==4) {
                  return 'views/widget/templates/create/widget-HTML-create.view.client.html';
              }
+             if(vm.wg==5) {
+                 return 'views/widget/templates/create/widget-TEXT-create.view.client.html';
+             }
          }
 
 

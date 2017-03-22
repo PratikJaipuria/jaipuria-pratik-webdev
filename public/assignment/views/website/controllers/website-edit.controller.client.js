@@ -52,14 +52,16 @@
         function deleteWebsite () {
             WebsiteService
                 .deleteWebsite(vm.websiteId)
-                .success(function () {
-                    if(website == null) {
-                        vm.error = "unable to delete the website";
-                    } else {
-                        vm.message = "website successfully deleted"
-                    }
+                .success(function (website) {
+                    // console.log(website);
+                    // if(website == null) {
+                    //     vm.error = "unable to delete the website";
+                    // } else {
+                    //     vm.message = "website successfully deleted"
+                    // }
+                    vm.website = website;
 
-            })
+            });
             $location.url("/user/"+vm.userId+"/website");
 
         }

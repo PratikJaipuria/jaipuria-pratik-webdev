@@ -10,30 +10,110 @@ module.exports = function (app,model) {
 
     var pageModel = model.pageModel;
     var websiteModel = model.websiteModel;
+    var widgetModel = model.widgetModel;
 
-    var pages = [
-        {_id: "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
-        {_id: "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
-        {_id: "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"}
-    ];
+    // var pages = [
+    //     {_id: "321", "name": "Post 1", "websiteId": "456", "description": "Lorem"},
+    //     {_id: "432", "name": "Post 2", "websiteId": "456", "description": "Lorem"},
+    //     {_id: "543", "name": "Post 3", "websiteId": "456", "description": "Lorem"}
+    // ];
 
 
     function deletePage(req,res) {
         var pageId = req.params.pageId;
+        // pageModel
+        //     .findPageById(pageId)
+        //     .then(function (page) {
+        //         websiteModel
+        //             .deletePageId(page._website,page._id)
+        //             .then(function() {
+        //                 widgetModel
+        //                     .findAllWidgetsForPage(page._id)
+        //                     .then(function (widgets) {
+        //                         var pageid = page._id;
+        //                         // console.log(pageid);
+        //                         if(widgets.length > 0){
+        //                             console.log(widgets);
+        //                             widgetModel
+        //                                 .deleteWidgetforPage(widgets)
+        //                                 .then(function (pageinfo) {
+        //                                     console.log("Yepiiiiiieeeeeeeeee",pageid);
+        //
+        //                                     pageModel
+        //                                         .deletePage(pageid)
+        //                                         .then(function () {
+        //                                             res.sendStatus(200);
+        //                                         })
+        //                                 })
+        //
+        //                                 }else{pageModel
+        //                                         .deletePage(pageid)
+        //                                         .then(function () {
+        //                                             res.sendStatus(200);
+        //                                     });}
+        //                                     });
+        //
+        //            })
+        //     });
+        //res.sendStatus(200);
+
+        // // var pageId = req.params.pageId;
         pageModel
             .findPageById(pageId)
-            .then(function (page) {
-                websiteModel
-                    .deletePageId(page._website,page._id)
-                    .then(function (pageid) {
-                        pageModel
-                            .deletePage(pageid)
-                            .then(function () {
-                                // res.sendStatus(200);
-                            })
-                    })
-            });
+            .then(
+                function (page) {
+                    // console.log("widgets===>",page.widgets);
+                    widgetModel
+                        .deleteWidgetforPage(page.widgets)
+                        .then(
+                            function () {
+                                console.log(page._website);
+                                websiteModel
+                                    .deletePageId(page._website, pageId)
+                                    .then(
+                                        function (website) {
+                                        pageModel
+                                                .deletePage(pageId)
+                                                .then(
+                                                    function (page) {
+                                                        res.json(page)
+                                                    },
+                                                    function (err) {
+                                                        res.sendStatus(400).send(err);
+                                                    }
+                                                );
+                                        },
+                                        function (err) {
+                                            res.sendStatus(400).send(err);
+                                        }
+                                    );
+                            },
+                            function (err) {
+                                res.sendStatus(400).send(err);
+                            }
+                        );
+
+                }, function (err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
+
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function updatePage(req,res) {
         var pageId = req.params.pageId;
@@ -78,6 +158,7 @@ module.exports = function (app,model) {
         pageModel
             .findPageById(pageId)
             .then(function(page){
+                // console.log("Pageeeeeeeeeeeeee",page);
                 res.json(page)
             },function (error) {
                 res.sendStatus(500).send(error);
@@ -92,7 +173,6 @@ module.exports = function (app,model) {
         pageModel
             .findAllPagesForWebsite(websiteId)
             .then(function (webpages) {
-                // console.log(webpages);
                 res.json(webpages);
             },function (error) {
                 res.sendStatus(500).send(error);

@@ -53,8 +53,16 @@
         function deletePage() {
             PageService
                 .deletePage(vm.pageId)
-                .success(function () {
-                    
+                .success(function (page) {
+                    // if(page == null) {
+                    //     vm.page = page;
+                    //     vm.error = "unable to delete the pagee";
+                    // } else {
+                    //     // init();
+                    //     vm.page = page;
+                    //     vm.message = "page successfully deleted"
+                    // }
+                    vm.page = page;
                 });
 
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");

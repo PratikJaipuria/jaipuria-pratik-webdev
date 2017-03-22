@@ -17,7 +17,10 @@
             PageService
                 .findPageByWebsiteId(vm.websiteId)
                 .success(function (webpages) {
+
+                    // console.log(webpages);
                     vm.pages = webpages;
+                    // webpages;
                 })
         }
 

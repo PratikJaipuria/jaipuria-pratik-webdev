@@ -13,17 +13,40 @@ module.exports = function () {
         findWidgetById:findWidgetById,
         updateWidget:updateWidget,
         deleteWidget:deleteWidget,
-        reorderWidget:reorderWidget
+        reorderWidget:reorderWidget,
+        deleteWidgetforPage:deleteWidgetforPage
     };
 
     return api;
+
+    function deleteWidgetforPage(widgets) {
+        var deferred = q.defer();
+        console.log("widget model delete widget for page",widgets);
+        var widgetList = [];
+        for (var i = 0; i < widgets.length; i++) {
+            widgetList.push(widgets[i]);
+        }
+        for (var w in widgetList) {
+           console.log("inside w loop", widgets[w]);
+            widgetModel
+                .remove({_id: widgets[w]}, function (err, widget) {
+                    if (err) {
+                        deferred.abort(err);
+                    } else {
+                        deferred.resolve(widget);
+                    }
+                });
+        }
+        deferred.resolve(widgets);
+        return deferred.promise;
+    }
 
 
     function deleteWidget(widgetId) {
         // console.log("model",widgetId);
         var deferred = q.defer();
         widgetModel.findOne({_id:widgetId},function (err,widget) {
-            // console.log("WIDGET",widget);
+
             if (err) {
                 deferred.abort()
             } else {
@@ -36,35 +59,33 @@ module.exports = function () {
                         // console.log("Array of widgets",widgets)
                         widgetlength = widgets.length;
                         // console.log("widgetlen",widgets.length);
-                        widgetModel.remove({_id: widgetId}, function (err,data) {
-                                if (err) {
-                                    deferred.abort(err);
-                                } else {
-                                    var i ;
 
-                                    console.log("length",widgetlength);
-                                    for (i = widget.order+1; i < widgetlength; i++) {
-                                        console.log(i);
-                                        widgetModel.update({"order": i}, {
+                                    var i ;
+                                    // console.log("length",widgetlength);
+                                    for (i = widget.order; i <= widgetlength; i++) {
+                                        // console.log(i);
+                                        widgetModel.update({"order": i+1}, {
                                                 $set: {
-                                                    "order": i-1
+                                                    "order": i
                                                 }
                                             },function (err,data) {
                                             if(err){
                                                 deferred.abort()
                                             }else{
-                                                deferred.resolve()
+                                                widgetModel.remove({_id: widgetId}, function (err,data) {
+                                                    if (err) {
+                                                        deferred.abort(err);
+                                                    } else {
+                                                        deferred.resolve(data);
+                                                    }
+                                                });
                                             }
-                                        })
+                                        });
                                     }
-                                    deferred.resolve();
-                                }
-                            });
-                        }});
-                    }
-
+                        }
+                    });
+            }
         });
-
         return deferred.promise;
     }
 
@@ -188,7 +209,7 @@ module.exports = function () {
                                             $set: {
                                                 order:i+1}},function (err,msg) {
                                             if(err){
-                                                deferred.reject();
+                                                deferred.abort(err);
                                             }else{
                                                 deferred.resolve(widgets);
                                             }
@@ -198,7 +219,7 @@ module.exports = function () {
                                     .update({_id:widget._id},{
                                         $set:{order:final}},function (err,msg) {
                                             if(err){
-                                                deferred.reject();
+                                                deferred.abort(err);
                                             }else{
                                                 deferred.resolve(widget);
                                             }
@@ -214,7 +235,7 @@ module.exports = function () {
                                             $set: {
                                                 order:i-1}},function (err,msg) {
                                             if(err){
-                                                deferred.abort();
+                                                deferred.abort(err);
                                             }else{
                                                 deferred.resolve(widgets);
                                             }
@@ -224,7 +245,7 @@ module.exports = function () {
                                     .update({_id:widget._id},{
                                         $set:{order:final}},function (err,msg) {
                                         if(err){
-                                            deferred.abort();
+                                            deferred.abort(err);
                                         }else{
                                             deferred.resolve(widget);
                                         }

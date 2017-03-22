@@ -38,6 +38,7 @@
             return $http.get(url);
 
         }
+
         function findAllWidgets(pageId) {
             return $http.get("/api/page/"+pageId+"/widget");
         }

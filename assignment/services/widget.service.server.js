@@ -2,29 +2,12 @@
  * Created by Pratik on 2/22/2017.
  */
 
-
-
 module.exports = function (app,model) {
-    var widgets = [
-        { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": "2", "text": "EXPLORE"},
-        { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "New Measurements of the Universe Expanding Tell a Confusing Story"},
-        { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-            "url": "http://www.hdbloggers.net/wp-content/uploads/2016/11/Art-Beautiful-Wallpapers.jpg"},
-        { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": '<p>Anker’s kevlar-reinforced PowerLine cables are <a href="http://gear.lifehacker.com/your-favorite-lightning-cables-anker-powerline-and-pow-1782036601" target="_blank" rel="noopener">far and away our readers’ top choice for charging their gadgets</a>, and you can save on several models today, including some from the nylon-wrapped PowerLine+ collection. I use these cables every single day, and I’ve never had one fray or stop working. Just be sure to note the promo codes below.<br></p>'},
-        { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": "4", "text": "Lorem ipsum"},
-        { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-            "url": "https://youtu.be/6pxRHBw-k8M" },
-        { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-    ];
 
     var pageModel = model.pageModel;
     var widgetModel = model.widgetModel;
 
-
     var multer = require('multer'); // npm install multer --save
-
-
-
 
     app.get("/api/page/:pageId/widget",findAllWidgetsForPage);
     app.get("/api/widget/:widgetId",findWidgetById);
@@ -59,9 +42,6 @@ module.exports = function (app,model) {
         var destination = myFile.destination; // folder where file is saved to
         if (widgetId_update) {
 
-            ///call update function
-
-
             var widgetId = widgetId_update;
             var newWidget = {
                 // _id: widgetId,
@@ -82,7 +62,7 @@ module.exports = function (app,model) {
 
         }else{
 
-            // var widgetId = ((new Date()).getTime()).toString();
+
 
             var newWidget = {
                 // _id: widgetId,
@@ -92,7 +72,7 @@ module.exports = function (app,model) {
                 url: req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename
                 // url:widget.url
             };
-            // widgets.push(newWidget);
+
             widgetModel
                 .createWidget(pageId,newWidget)
                 .then(function (widget) {
@@ -110,48 +90,25 @@ module.exports = function (app,model) {
                     })
 
         }
-
-
-        // for (var i in widgets) {
-        //
-        //     if (widgets[i]._id == widgetId) {
-        //         widgets[i].width = width;
-        //         widgets[i].url = req.protocol + '://' + req.get('host') + "/uploads/" + myFile.filename;
-        //
-        //     }
-        // }
-
-
-        // res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
     }
 
 
     function deleteWidget(req,res) {
         var widgetId = req.params.widgetId;
-
-        // console.log(widgetId);
         widgetModel
             .findWidgetById(widgetId)
             .then(function (widget) {
-                // console.log(widget)
                 pageModel
                     .deleteWidgetId(widget._page,widget._id)
                     .then(function (widgetid) {
-                        // console.log(widgetid);
                         widgetModel
                             .deleteWidget(widgetid)
                             .then(function () {
                                  res.sendStatus(200);
-                                // console.log("service",widgetid)
+
                             })
                     })
             });
-        // for(var w in widgets) {
-        //     if(widgets[w]._id == widgetId) {
-        //         widgets.splice(w, 1);
-        //     }
-        // }
-
     }
 
     function updateWidget(req,res) {
@@ -167,11 +124,6 @@ module.exports = function (app,model) {
         });
 
         }
-
-
-
-
-
 
 
     function findWidgetsByPageId(req,res) {
@@ -193,6 +145,34 @@ module.exports = function (app,model) {
 
         // widget.pageId = pageId;
         // widget._id = ((new Date()).getTime()).toString();
+
+        if(widget.widgetType == "TEXT"){
+
+            var newWidget = {
+                widgetType: "TEXT",
+                text:widget.text,
+                rows:widget.rows,
+                placeholder:widget.placeholder,
+                formatted:widget.formatted
+            };
+
+            widgetModel
+                .createWidget(pageId,newWidget)
+                .then(function (widget) {
+                        pageModel
+                            .addWidgetId(widget._id,pageId)
+                            .then(function (widget) {
+                                res.json(widget)
+                            },function () {
+                                res.sendStatus(400);
+                            })
+                    },
+                    function (error) {
+                        res.sendStatus(500).send(error);
+                    })
+
+
+        }
 
         if(widget.widgetType == "HEADER"){
 

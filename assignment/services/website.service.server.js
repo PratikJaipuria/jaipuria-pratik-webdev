@@ -10,15 +10,9 @@ module.exports = function (app,model) {
 
     var websiteModel = model.websiteModel;
     var userModel = model.userModel;
+    var pageModel = model.pageModel;
+    var widgetModel = model.widgetModel;
 
-    var websites = [
-        { _id: "123", "name": "Facebook",    "developerId": "456", "description": "Lorem", created: new Date() },
-        { _id: "234", "name": "Tweeter",     "developerId": "456", "description": "Lorem", created: new Date() },
-        { _id: "456", "name": "Gizmodo",     "developerId": "456", "description": "Lorem", created: new Date() },
-        { _id: "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Lorem", created: new Date() },
-        { _id: "678", "name": "Checkers",    "developerId": "123", "description": "Lorem", created: new Date() },
-        { _id: "789", "name": "Chess",       "developerId": "234", "description": "Lorem", created: new Date() }
-    ];
 
 
     function deleteWebsite(req,res) {
@@ -26,19 +20,102 @@ module.exports = function (app,model) {
         websiteModel
             .findWebsiteById(websiteId)
             .then(function (website) {
-
+                console.log("website", website);
                 userModel
                     .deleteWebsiteId(website._user, website._id)
 
-                    .then(function (websiteid){
-                        // console.log(website);
-                        websiteModel
-                            .deleteWebsite(websiteid)
-                            .then(function () {
-                                // res.sendStatus(200);
-                            })
-                    });
+                    .then(function (websiteid) {
+                        console.log("website id after deleting ", websiteid);
+                        pageModel
+                            .findAllPagesForWebsite(websiteId)
+                            .then(function (pages) {
+                                for (var p = 0; p < pages.length; p++) {
+                                    pageModel
+                                        .findPageById(pages[p]._id)
+                                        .then(
+                                            function (page) {
+                                                // console.log("widgets===>",page.widgets);
+                                                widgetModel
+                                                    .deleteWidgetforPage(page.widgets)
+                                                    .then(
+                                                        function () {
+                                                            console.log(page._website);
+                                                            websiteModel
+                                                                .deletePageId(page._website, pageId)
+                                                                .then(
+                                                                    function (website) {
+                                                                        pageModel
+                                                                            .deletePage(pageId)
+                                                                            .then(
+                                                                                function (page) {
+
+                                                                                },
+                                                                                function (err) {
+                                                                                    res.sendStatus(400).send(err);
+                                                                                }
+                                                                            );
+                                                                    },
+                                                                    function (err) {
+                                                                        res.sendStatus(400).send(err);
+                                                                    }
+                                                                );
+                                                        },
+                                                        function (err) {
+                                                            res.sendStatus(400).send(err);
+                                                        });
+
+                                            }, function (err) {
+                                                res.sendStatus(400).send(err);
+                                            }
+                                        );
+                                }
+                            });
+
             });
+                websiteModel
+                    .deleteWebsite(websiteId)
+                    .then(function () {
+                        res.json(200);
+                    })
+            });
+        // websiteModel
+        //     .findWebsiteById(websiteId)
+        //     .then(
+        //         function (website) {
+        //             pageModel
+        //                 .deleteAllPagesForThisWebsite(website.pages)
+        //                 .then(
+        //                     function () {
+        //                         userModel
+        //                             .removeWebsiteFromUser(websiteId, website._user[0])
+        //                             .then(
+        //                                 function (website) {
+        //                                     websiteModel
+        //                                         .deleteWebsite(websiteId)
+        //                                         .then(
+        //                                             function (website) {
+        //                                                 res.json(website);
+        //                                             },
+        //                                             function (err) {
+        //                                                 res.sendStatus(400).send(err);
+        //                                             }
+        //                                         );
+        //                                 },
+        //                                 function (err) {
+        //                                     res.sendStatus(400).send(err);
+        //                                 }
+        //                             );
+        //                     },
+        //                     function (err) {
+        //                         res.sendStatus(400).send(err);
+        //                     }
+        //                 );
+        //         },
+        //         function (err) {
+        //             res.sendStatus(400).send(err);
+        //         });
+
+
     }
 
 

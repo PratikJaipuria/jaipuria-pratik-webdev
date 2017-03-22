@@ -15,12 +15,52 @@ module.exports = function () {
         deletePage:deletePage,
         addWidgetId:addWidgetId,
         deleteWidgetId:deleteWidgetId,
-        getSequenceofWidget:getSequenceofWidget
+        getSequenceofWidget:getSequenceofWidget,
+        // deleteAllPagesForThisWebsite: deleteAllPagesForThisWebsite
         // deletePage:deletePage
         // // findWebsiteById: findWebsiteById
     };
     return api;
 
+
+    // function deleteAllPagesForThisWebsite(pages) {
+    //     var deferred = q.defer();
+    //     var pageList = [];
+    //     for(var i = 0; i < pages.length ; i++) {
+    //         pageList.push(pages[i]);
+    //     }
+    //
+    //     for(var p in pageList) {
+    //         var pageId = pageList[p];
+    //         pageModel
+    //             .findOne({_id: pageId}, function (err, page) {
+    //                 if (err) {
+    //                     deferred.abort(err);
+    //                 } else {
+    //                     widgetModel
+    //                         .deleteAllWidgetsForThisPage(page.widgets)
+    //                         .then(
+    //                             function () {
+    //                                 PageModel
+    //                                     .remove({_id: page._id}, function (err, page) {
+    //                                         if (err) {
+    //                                             deferred.abort(err);
+    //                                         } else {
+    //                                             deferred.resolve(page);
+    //                                         }
+    //                                     });
+    //                                 deferred.resolve(page);
+    //                             },
+    //                             function (err) {
+    //                                 deferred.abort(err);
+    //                             }
+    //                         );
+    //                 }
+    //             });
+    //     }
+    //     deferred.resolve(pages);
+    //     return deferred.promise;
+    // }
 
     function getSequenceofWidget(pageId) {
         var deferred = q.defer();
@@ -72,11 +112,11 @@ module.exports = function () {
     function deletePage(pageId) {
         var deferred = q.defer();
         pageModel
-            .remove({_id:pageId},function (err) {
+            .remove({_id:pageId},function (err,page) {
             if (err){
-                deferred.abort()
+                deferred.abort(err)
             }else {
-                deferred.resolve()
+                deferred.resolve(page)
             }
 
             });
