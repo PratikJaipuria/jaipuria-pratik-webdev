@@ -200,26 +200,26 @@ module.exports = function () {
         var deferred = q.defer();
 
         widgetModel
-            .find({_page:pageId},function (err,widgets) {
+            .find({"_page":pageId},function (err,widgets) {
                 if(err){
                     deferred.abort()
                 }else{
 
-                    widgetModel.findOne({order:initial},function (err,widget) {
+                    widgetModel.findOne({"order":initial},function (err,widget) {
                         if(err){
                             deferred.abort();
                         }else {
 
-                            if (initial > final)
+                            if (widget && initial > final)
                             {
                                 var i;
                                 var  j = final;
                                 for (i= initial - 1; i >= j ; i--)
                                 {
                                     widgetModel
-                                        .update({order:i},{
+                                        .update({"order":i},{
                                             $set: {
-                                                order:i+1}},function (err,msg) {
+                                                "order":i+1}},function (err,msg) {
                                             if(err){
                                                 deferred.abort(err);
                                             }else{
@@ -229,7 +229,7 @@ module.exports = function () {
                                 }
                                 widgetModel
                                     .update({_id:widget._id},{
-                                        $set:{order:final}},function (err,msg) {
+                                        $set:{"order":final}},function (err,msg) {
                                             if(err){
                                                 deferred.abort(err);
                                             }else{
@@ -237,15 +237,15 @@ module.exports = function () {
                                             }
                                         });
 
-                            }else{
+                            }else if (widget && initial < final){
 
                                 var i;
                                 for (i= initial+1; i <= final ; i++)
                                 {
                                     widgetModel
-                                        .update({order:i},{
+                                        .update({"order":i},{
                                             $set: {
-                                                order:i-1}},function (err,msg) {
+                                                "order":i-1}},function (err,msg) {
                                             if(err){
                                                 deferred.abort(err);
                                             }else{
@@ -255,7 +255,7 @@ module.exports = function () {
                                 }
                                 widgetModel
                                     .update({_id:widget._id},{
-                                        $set:{order:final}},function (err,msg) {
+                                        $set:{"order":final}},function (err,msg) {
                                         if(err){
                                             deferred.abort(err);
                                         }else{
@@ -263,6 +263,9 @@ module.exports = function () {
                                         }
                                     });
 
+                            }
+                            else{
+                                deferred.reject(err);
                             }
                         }
 
