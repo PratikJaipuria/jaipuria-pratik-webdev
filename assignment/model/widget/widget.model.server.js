@@ -62,26 +62,37 @@ module.exports = function () {
 
                                     var i ;
                                     // console.log("length",widgetlength);
-                                    for (i = widget.order; i <= widgetlength; i++) {
-                                        // console.log(i);
-                                        widgetModel.update({"order": i+1}, {
+                                    if(widgetlength > 1){
+                                        for (i = widget.order; i <= widgetlength; i++) {
+                                            // console.log(i);
+                                            widgetModel.update({"order": i+1}, {
                                                 $set: {
                                                     "order": i
                                                 }
                                             },function (err,data) {
-                                            if(err){
-                                                deferred.abort()
-                                            }else{
-                                                widgetModel.remove({_id: widgetId}, function (err,data) {
-                                                    if (err) {
-                                                        deferred.abort(err);
-                                                    } else {
-                                                        deferred.resolve(data);
-                                                    }
-                                                });
-                                            }
-                                        });
+                                                if(err){
+                                                    deferred.abort()
+                                                }else{
+                                                    widgetModel.remove({_id: widgetId}, function (err,data) {
+                                                        if (err) {
+                                                            deferred.abort(err);
+                                                        } else {
+                                                            deferred.resolve(data);
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        }
+                                    }else{
+                                        widgetModel.remove({_id: widgetId}, function (err,data) {
+                                            if (err) {
+                                                deferred.abort(err);
+                                            } else {
+                                                deferred.resolve(data);
+                                            }  });
                                     }
+
+
                         }
                     });
             }
@@ -202,7 +213,8 @@ module.exports = function () {
                             if (initial > final)
                             {
                                 var i;
-                                for (i= initial - 1; i >= final ; i--)
+                                var  j = final;
+                                for (i= initial - 1; i >= j ; i--)
                                 {
                                     widgetModel
                                         .update({order:i},{
