@@ -55,10 +55,19 @@ module.exports = function (app,model) {
 
             widgetModel
                 .updateWidget(widgetId,newWidget)
-                .then(function () {
+                .then(
+                    function (widget) {
                     res.redirect("/assignment/#/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget/");
-                })
+                });
 
+                //     function (widget) {
+                //         console.log("update image widget",widget);
+                //         res.json(widget);
+                //     },
+                //     function (err) {
+                //         res.sendStatus(400).send(err);
+                //     }
+                // );
 
         }else{
 
@@ -114,7 +123,7 @@ module.exports = function (app,model) {
     function updateWidget(req,res) {
         var widgetId = req.params.widgetId;
         var widget = req.body;
-
+        // console.log("update server",widget,widgetId);
         widgetModel
             .updateWidget(widgetId,widget)
             .then(function (widget) {

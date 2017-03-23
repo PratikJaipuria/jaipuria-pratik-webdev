@@ -21,13 +21,13 @@ module.exports = function () {
 
     function deleteWidgetforPage(widgets) {
         var deferred = q.defer();
-        console.log("widget model delete widget for page",widgets);
+        // console.log("widget model delete widget for page",widgets);
         var widgetList = [];
         for (var i = 0; i < widgets.length; i++) {
             widgetList.push(widgets[i]);
         }
         for (var w in widgetList) {
-           console.log("inside w loop", widgets[w]);
+           // console.log("inside w loop", widgets[w]);
             widgetModel
                 .remove({_id: widgets[w]}, function (err, widget) {
                     if (err) {
@@ -103,7 +103,7 @@ module.exports = function () {
 
     function updateWidget(widgetId, widget) {
         var deferred = q.defer();
-
+        // console.log("Model update",widgetId,widget);
 
         widgetModel
             .update({_id:widgetId},{
@@ -121,8 +121,8 @@ module.exports = function () {
                     class: widget.class,
                     icon: widget.icon,
                     deletable: widget.deletable,
-                    formatted: widget.formatted,
-                    order:widget.order
+                    formatted: widget.formatted
+                    // order:widget.order
 
                 }
     },function (err,widget) {
@@ -157,7 +157,7 @@ module.exports = function () {
 
         widgetModel.find({"_page": pageId},function (err,widgets) {
             if (err){
-                console.log("widget model server findAllwidget for page",err);
+                // console.log("widget model server findAllwidget for page",err);
                 deferred.abort(err);
             }else {
 
@@ -217,7 +217,7 @@ module.exports = function () {
                                 for (i= initial - 1; i >= j ; i--)
                                 {
                                     widgetModel
-                                        .update({"order":i},{
+                                        .update({"order":i,_page:pageId},{
                                             $set: {
                                                 "order":i+1}},function (err,msg) {
                                             if(err){
@@ -228,7 +228,7 @@ module.exports = function () {
                                         })
                                 }
                                 widgetModel
-                                    .update({_id:widget._id},{
+                                    .update({_id:widget._id,_page:pageId},{
                                         $set:{"order":final}},function (err,msg) {
                                             if(err){
                                                 deferred.abort(err);
@@ -243,7 +243,7 @@ module.exports = function () {
                                 for (i= initial+1; i <= final ; i++)
                                 {
                                     widgetModel
-                                        .update({"order":i},{
+                                        .update({"order":i,_page:pageId},{
                                             $set: {
                                                 "order":i-1}},function (err,msg) {
                                             if(err){
@@ -254,7 +254,7 @@ module.exports = function () {
                                         })
                                 }
                                 widgetModel
-                                    .update({_id:widget._id},{
+                                    .update({_id:widget._id,_page:pageId},{
                                         $set:{"order":final}},function (err,msg) {
                                         if(err){
                                             deferred.abort(err);

@@ -20,12 +20,12 @@ module.exports = function (app,model) {
         websiteModel
             .findWebsiteById(websiteId)
             .then(function (website) {
-                console.log("website", website);
+                // console.log("website", website);
                 userModel
                     .deleteWebsiteId(website._user, website._id)
 
                     .then(function (websiteid) {
-                        console.log("website id after deleting ", websiteid);
+                        // console.log("website id after deleting ", websiteid);
                         pageModel
                             .findAllPagesForWebsite(websiteId)
                             .then(function (pages) {
@@ -39,7 +39,7 @@ module.exports = function (app,model) {
                                                     .deleteWidgetforPage(page.widgets)
                                                     .then(
                                                         function () {
-                                                            console.log(page._website);
+                                                            // console.log(page._website);
                                                             websiteModel
                                                                 .deletePageId(page._website, pageId)
                                                                 .then(

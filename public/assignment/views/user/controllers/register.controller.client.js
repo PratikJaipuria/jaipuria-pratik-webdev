@@ -12,13 +12,13 @@
         // console.log(vm.user1);
 
         function register(user1) {
-            console.log(user1);
+            // console.log(user1);
                 UserService
                     .findUserByUsername(user1.username)
                      //console.log(user1.username)
                     .success(function (user) {
                         vm.error = "sorry "+ user.username + " exist";
-                         console.log(user1.username)
+                         // console.log(user1.username)
                     })
                     .error(function () {
                         var newUser = {
@@ -32,11 +32,11 @@
                             // websites:[String],
                             datecreated:""
                         };
-                        console.log(newUser);
+                        // console.log(newUser);
                         UserService
                             .createUser(newUser)
                             .success(function (user){
-                                console.log("abcd");
+                                // console.log("abcd");
                                 // var user = UserService.findUserByUsername(user.username);
                                 vm.user = user;
                                 // console.log("User ID",user.firstName);

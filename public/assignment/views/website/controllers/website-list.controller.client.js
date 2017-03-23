@@ -15,7 +15,7 @@
             WebsiteService
                 .findAllWebsitesByUser(vm.userId)
                 .success(function (websites) {
-                    console.log(websites);
+                    // console.log(websites);
                     vm.websites = websites;
 
             })

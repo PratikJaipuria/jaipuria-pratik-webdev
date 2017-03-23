@@ -36,7 +36,7 @@
         init();
 
         function rearrangeList(updatedIndex){
-            console.log(updatedIndex);
+            // console.log(updatedIndex);
             var promise=WidgetService.rearrangeList(vm.pageId, updatedIndex);
             promise.error(function (){
 

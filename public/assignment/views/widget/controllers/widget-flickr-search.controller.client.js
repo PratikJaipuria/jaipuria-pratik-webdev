@@ -57,6 +57,7 @@
 
             widget.url = url;
             if (vm.widgetId){
+                // console.log("Update imgae",vm.widgetId);
                 WidgetService
                     .updateWidget(vm.widgetId,widget)
                     .success(function (widgets) {
