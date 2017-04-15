@@ -32,8 +32,6 @@
             var key = "fa48cb517112b1e6e16b5920e5189861";
             var secret = "08af3ea7defc90db";
             var urlBase = "https://api.flickr.com/services/rest/?method=flickr.photos.search&format=json&api_key=API_KEY&text=TEXT";
-
-
             var url = urlBase.replace("API_KEY", key).replace("TEXT", searchTerm);
             return $http.get(url);
 
